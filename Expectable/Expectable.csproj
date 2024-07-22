@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+	    <TargetFramework>netstandard2.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <Authors>Richard Ramer</Authors>
+        <PackageId>Expectable</PackageId>
+        <Description>Define an expected exception with optional expectations.</Description>
+        <PackageProjectUrl>https://github.com/raramer/Expectable</PackageProjectUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageTags>expected exception;expected;exception;netstandard2</PackageTags>
+	    <PackageReadmeFile>README.md</PackageReadmeFile>
+        <Version>1.0.0-alpha</Version>
+    </PropertyGroup>
+
+	<ItemGroup>
+		<InternalsVisibleTo Include="Expectable.Tests" />
+		<None Include="..\README.md" Pack="true" PackagePath="" />
+	</ItemGroup>
+
+</Project>
