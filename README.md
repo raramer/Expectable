@@ -19,6 +19,8 @@ dotnet add package Expectable
 1. Define an ExpectedException with an *exceptionType* and optional list of *expectations*.  
 
    ```csharp
+   // using Expectable;
+
    ExpectedException expectedException = Expect<ArgumentException>.Where
        .MessageStartWith("value")
        .MessageContains("cannot be", StringComparison.OrdinalIgnoreCase)
@@ -28,7 +30,15 @@ dotnet add package Expectable
 2. Catch exception
 
    ```csharp
-   var exception = Assert.Throws(expectedException.Type, () => throw new ArgumentException("value CANNOT be null");
+   var value = default(string);
+   var exception = Assert.Throws(expectedException.Type, () => DoSomething(value));
+
+   // void DoSomething(string value)
+   // {
+   //      if (value == null) 
+   //         throw new ArgumentException("value is null");
+   //     ...
+   // }
    ```
 
 3. Compare exception 

@@ -32,7 +32,7 @@ public abstract class ExpectationTestBase
         // hash code
         var hashCode1 = left.GetHashCode();
         var hashCode2 = right.GetHashCode();
-        var details = $@"{left}\r\n{hashCode1}\r\n\r\n{right}\r\n{hashCode2}";
+        var details = $@"{left}{Environment.NewLine}{hashCode1}{Environment.NewLine}{Environment.NewLine}{right}{Environment.NewLine}{hashCode2}";
 
         Assert.Equal(expectEqual, hashCode1 == hashCode2);
     }

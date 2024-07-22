@@ -268,14 +268,14 @@ public class ExpectedExceptionTests
             expectedToString.Append(" where");
             foreach (var expectation in expectedException.Expectations)
             {
-                expectedToString.Append("\r\n  ");
+                expectedToString.Append($"{Environment.NewLine}  ");
                 expectedToString.Append(exception is null
                     ? "    "
                     : $"[{(expectation.IsMatch(exception) ? '+' : '-')}] ");
                 expectedToString.Append(expectation);
             }
         }
-        _testOutput.WriteLine($"Expected ToString {when}: \r\n{expectedException}\r\n");
+        _testOutput.WriteLine($"Expected ToString {when}: {Environment.NewLine}{expectedException}{Environment.NewLine}");
         return expectedToString.ToString();
     }
 

@@ -54,7 +54,11 @@ public class ReadmeExamples
         }
     }
 
-    private void DoSomething(string? value) => throw new ArgumentException("value was null");
+    private void DoSomething(string? value)
+    { 
+        if (value == null) 
+            throw new ArgumentException("value was null");
+    }
 
     [Fact]
     public void ToStringReset()
