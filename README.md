@@ -70,7 +70,7 @@ dotnet add package Expectable
    //   [-] Message contains "cannot be"
    //   [+] Message ends with "null">
    //   But was:  <System.ArgumentException: value was null
-   //    at CustomerUI.Tests.SignInPageTests.<>c.<Ex>b__0_0() in C:\Users\rramer\Desktop\Code\Projects\intl-platform-2\src\CustomerUI.Tests\SignInPageTests.cs:line 16
+   //    at Expectable.Tests.ReadmeExamples.ReadmeExamples.DoSomething(String value)
    //    at NUnit.Framework.Assert.Throws(IResolveConstraint expression, TestDelegate code, String message, Object[] args)>
    ```
 
