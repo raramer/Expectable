@@ -43,22 +43,35 @@ dotnet add package Expectable
 
 3. Compare exception 
 
+   XUnit
+
    ```csharp
    Assert.Equal(expectedException, exception);
+
+   // Message:
+   //   Assert.Equal() Failure: Values differ
+   //   Expected: System.ArgumentException where
+   //               [+] Message starts with "value"
+   //               [-] Message contains "cannot be" (ComparisonType: OrdinalIgnoreCase)
+   //               [+] Message ends with "null"
+   //   Actual:   System.ArgumentException: value was not null
+   //                at Expectable.Tests.ReadmeExamples.ReadmeExamples.DoSomething(String value)
+   //                at Xunit.Assert.RecordException(Action testCode)
    ```
 
-   when not equal
+   NUnit
 
-   ```
-   Message:
-     Assert.Equal() Failure: Values differ
-     Expected: System.ArgumentException where
-                 [+] Message starts with "value"
-                 [-] Message contains "cannot be" (ComparisonType: OrdinalIgnoreCase)
-                 [+] Message ends with "null"
-     Actual:   System.ArgumentException: value was not null
-                  at Expectable.Tests.ReadmeExamples.ReadmeExamples.DoSomething(String value)
-                  at Xunit.Assert.RecordException(Action testCode)
+   ```csharp
+   Assert.That<ExpectedException>(exception, Is.EqualTo(expectedException));
+
+   // Assert.That(exception, Is.EqualTo(expectedException))
+   //   Expected: <System.ArgumentException where
+   //   [+] Message starts with "value"
+   //   [-] Message contains "cannot be"
+   //   [+] Message ends with "null">
+   //   But was:  <System.ArgumentException: value was null
+   //    at CustomerUI.Tests.SignInPageTests.<>c.<Ex>b__0_0() in C:\Users\rramer\Desktop\Code\Projects\intl-platform-2\src\CustomerUI.Tests\SignInPageTests.cs:line 16
+   //    at NUnit.Framework.Assert.Throws(IResolveConstraint expression, TestDelegate code, String message, Object[] args)>
    ```
 
 ## Expectations
