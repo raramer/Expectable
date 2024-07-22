@@ -109,7 +109,8 @@ Checks that the exception message starts with a specific string value.
 * **value** : The string to compare to the substring at the start of the exception message.
 * **comparisonType** : One of the enumeration values that determines how the exception message and value are compared. (Default is StringComparison.Ordinal)
 
-## `ToString()`
+## ToString()
+
 The value returned is different before and after comparing to a *thrown* exception.  A
 
 ### Before expectedException.Equals(thrownException)
@@ -134,7 +135,8 @@ System.ArgumentException where
 
 *[-] expectation not matched*
 
-## `ResetResults()`
+## ResetResults()
+
 Removes any previously cached results.  The value returned by ToString() is reset to its initial value.
 
 ```csharp
@@ -145,7 +147,7 @@ expectedException.ResetResults();
 
 While using `Expect<TException>.Where ...` is the most succinct and versatile way to initialize an ExpectedException with expectations, the following alternatives are also available.
 
-### Constructor `ExpectedException(Type exceptionType, params Expectation[] expectations)`
+### ExpectedException(Type exceptionType, params Expectation[] expectations) Constructor
 
 ```csharp
 ExpectedException expectedException = new ExpectedException(typeof(ArgumentException),
@@ -154,10 +156,9 @@ ExpectedException expectedException = new ExpectedException(typeof(ArgumentExcep
     new MessageEndsWith("null"));
 ```
 
-*This is the verbose implementation of Expect&lt;TException&gt;.*
+*This is the verbose implementation called when an Expect&lt;TException&gt;.* is implicitly converted to an ExpectedException.
 
-
-### Constructor `ExpectedException(Exception exception)`
+### ExpectedException(Exception exception) Constructor
 
 ```csharp
 ExpectedException expectedException = new ExpectedException(new ArgumentException("value cannot be null"));
@@ -165,8 +166,7 @@ ExpectedException expectedException = new ExpectedException(new ArgumentExceptio
 // expectedException.Expectations: MessageEquals("value cannot be null")
 ```
 
-*If the source exception provided was previously thrown, then the value returned by expectedException.ToString will be sourceException.ToString()*
-
+*If the source exception provided was previously thrown, then the value returned by expectedException.ToString() will be sourceException.ToString()*
 
 ### Implicit Conversion from an exception instance
 
@@ -176,7 +176,7 @@ ExpectedException expectedException = new ArgumentException("value cannot be nul
 // expectedException.Expectations: MessageEquals("value cannot be null")
 ```
 
-*If the source exception provided was previously thrown, then the value returned by expectedException.ToString will be sourceException.ToString()*
+*If the source exception provided was previously thrown, then the value returned by expectedException.ToString() will be sourceException.ToString()*
 
 ### Implicit Conversion from exception type
 
@@ -184,4 +184,4 @@ ExpectedException expectedException = new ArgumentException("value cannot be nul
 ExpectedException expectedException = typeof(ArgumentException);
 // expectedException.Type: typeof(ArgumentException)
 // expectedException.Expectations: empty
-``` 
+```

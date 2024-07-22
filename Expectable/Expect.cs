@@ -1,17 +1,28 @@
-﻿using System;
+﻿using Expectable.Expectations;
+using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using Expectable.Expectations;
 
 namespace Expectable;
 
+/// <summary>
+/// An Fluent way to define an ExpectedException.
+/// </summary>
+/// <typeparam name="TException">The expected type of exception.</typeparam>
 public sealed class Expect<TException> where TException : Exception
 {
+    /// <summary>
+    /// Defines a new Expect<TException> that can be assigned to an ExpectedException
+    /// </summary>
     public static Expect<TException> Where
         => new Expect<TException>();
 
-    public static implicit operator ExpectedException(Expect<TException> expectedException)
-        => new ExpectedException(typeof(TException), expectedException._expectations.ToArray());
+    /// <summary>
+    /// Implicitly converts an Expect<typeparamref name="TException"/> to an ExpectedException.
+    /// </summary>
+    /// <param name="expect">The Expect<typeparamref name="TException"/> to convert.</param>
+    public static implicit operator ExpectedException(Expect<TException> expect)
+        => new ExpectedException(typeof(TException), expect._expectations.ToArray());
 
     private Expect() { }
 
