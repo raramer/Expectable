@@ -16,7 +16,9 @@ dotnet add package Expectable
 ```
 
 ## How to get started
-1. Define an ExpectedException with an *exceptionType* and optional list of *expectations*.  
+1. Define an ExpectedException. 
+ 
+   See **Initialization** and **Expectations** below for options.
 
    ```csharp
    // using Expectable;
@@ -27,10 +29,13 @@ dotnet add package Expectable
        .MessageEndsWith("null");
    ```
 
-2. Catch exception
+2. Catch the exception.
+
+   XUnit / NUnit
 
    ```csharp
-   var value = default(string);
+   // string value = null;
+
    var exception = Assert.Throws(expectedException.Type, () => DoSomething(value));
 
    // void DoSomething(string value)
@@ -41,42 +46,118 @@ dotnet add package Expectable
    // }
    ```
 
-3. Compare exception 
+3. Compare the exception to the expected exception.
 
    XUnit
 
    ```csharp
    Assert.Equal(expectedException, exception);
-
-   // Message:
-   //   Assert.Equal() Failure: Values differ
-   //   Expected: System.ArgumentException where
-   //               [+] Message starts with "value"
-   //               [-] Message contains "cannot be" (ComparisonType: OrdinalIgnoreCase)
-   //               [+] Message ends with "null"
-   //   Actual:   System.ArgumentException: value was not null
-   //                at Expectable.Tests.ReadmeExamples.ReadmeExamples.DoSomething(String value)
-   //                at Xunit.Assert.RecordException(Action testCode)
+   ```
+   ```
+   Message:
+     Assert.Equal() Failure: Values differ
+     Expected: System.ArgumentException where
+                 [+] Message starts with "value"
+                 [-] Message contains "cannot be" (ComparisonType: OrdinalIgnoreCase)
+                 [+] Message ends with "null"
+     Actual:   System.ArgumentException: value was not null
+                  at Expectable.Tests.ReadmeExamples.ReadmeExamples.DoSomething(String value)
+                  at Xunit.Assert.RecordException(Action testCode)
    ```
 
    NUnit
 
    ```csharp
    Assert.That<ExpectedException>(exception, Is.EqualTo(expectedException));
-
-   // Assert.That(exception, Is.EqualTo(expectedException))
-   //   Expected: <System.ArgumentException where
-   //   [+] Message starts with "value"
-   //   [-] Message contains "cannot be"
-   //   [+] Message ends with "null">
-   //   But was:  <System.ArgumentException: value was null
-   //    at Expectable.Tests.ReadmeExamples.ReadmeExamples.DoSomething(String value)
-   //    at NUnit.Framework.Assert.Throws(IResolveConstraint expression, TestDelegate code, String message, Object[] args)>
    ```
+   ```
+   Assert.That(exception, Is.EqualTo(expectedException))
+     Expected: <System.ArgumentException where
+     [+] Message starts with "value"
+     [-] Message contains "cannot be"
+     [+] Message ends with "null">
+     But was:  <System.ArgumentException: value was null
+      at Expectable.Tests.ReadmeExamples.ReadmeExamples.DoSomething(String value)
+      at NUnit.Framework.Assert.Throws(IResolveConstraint expression, TestDelegate code, String message, Object[] args)>
+   ```
+
+## Initialization
+
+There are several ways to initialize an ExpectedException.  
+
+See **Expectations** below for further options.
+
+### Implicit Conversion from Expect&lt;TException&gt;
+
+```csharp
+ExpectedException expectedException = Expect<ArgumentException>.Where
+    .MessageStartsWith("value")
+    .MessageContains("cannot be", StringComparison.OrdinalIgnoreCase)
+    .MessageEndsWith("null");
+```
+This is the most succinct and versatile way to initialize an ExpectedException that has expectations.
+
+This example expects
+* The exception to be an ArgumentException
+* The exception message to 
+   * start with "value"
+   * contain "cannot be" (case-insensitive)
+   * end with "null"
+
+### Implicit Conversion from exception type
+
+```csharp
+ExpectedException expectedException = typeof(ArgumentException);
+```
+This is useful when only the exception type is required.
+
+This example expects
+* The exception to be an ArgumentException
+
+### Implicit Conversion from an exception instance
+
+```csharp
+ExpectedException expectedException = new ArgumentException("value cannot be null");
+```
+If the source exception provided was previously thrown, then the value returned by expectedException.ToString() will be sourceException.ToString().
+
+This example expects
+* The exception to be an ArgumentException
+* The exception message to
+    * equal "value cannot be null"
+
+### ExpectedException(Type exceptionType, params Expectation[] expectations) Constructor
+
+```csharp
+ExpectedException expectedException = new ExpectedException(typeof(ArgumentException),
+    new MessageStartsWith("value"),
+    new MessageContains("cannot be", StringComparison.OrdinalIgnoreCase),
+    new MessageEndsWith("null"));
+```
+This is the verbose implementation of **Implicit Conversion from Expect&lt;TException&gt;**.
+
+This example expects
+* The exception to be an ArgumentException
+* The exception message to 
+   * start with "value"
+   * contain "cannot be" (case-insensitive)
+   * end with "null"
+
+### ExpectedException(Exception exception) Constructor
+
+```csharp
+ExpectedException expectedException = new ExpectedException(new ArgumentException("value cannot be null"));
+```
+This is the verbose implementation of **Implicit Conversion from an exception instance**. If the source exception provided was previously thrown, then the value returned by expectedException.ToString() will be sourceException.ToString().
+
+This example expects
+* The exception to be an ArgumentException
+* The exception message to
+    * equal "value cannot be null"
 
 ## Expectations
 
-Expectations allow you to confirm an optional list of expected conditions are fulfilled by the exception.
+Expectations allow you to confirm a list of expected conditions are fulfilled by the exception.
 
 ### MessageContains
 Checks that the exception message contains a specific string value.
@@ -111,9 +192,9 @@ Checks that the exception message starts with a specific string value.
 
 ## ToString()
 
-The value returned is different before and after comparing to a *thrown* exception.  A
+The value returned is different before and after comparing to a *thrown* exception.
 
-### Before expectedException.Equals(thrownException)
+### Before expectedException.Equals(exception)
 
 ```
 System.ArgumentException where
@@ -122,7 +203,7 @@ System.ArgumentException where
       Message ends with "null"
 ```
 
-### After expectedException.Equals(thrownException)
+### After expectedException.Equals(exception)
 
 ```
 System.ArgumentException where
@@ -130,9 +211,7 @@ System.ArgumentException where
   [-] Message contains "cannot be" (ComparisonType: OrdinalIgnoreCase)
   [+] Message ends with "null"
 ```
-
-*[+] expectation matched*
-
+*[+] expectation matched*; 
 *[-] expectation not matched*
 
 ## ResetResults()
@@ -143,45 +222,3 @@ Removes any previously cached results.  The value returned by ToString() is rese
 expectedException.ResetResults();
 ```
 
-## Initialization Alternatives
-
-While using `Expect<TException>.Where ...` is the most succinct and versatile way to initialize an ExpectedException with expectations, the following alternatives are also available.
-
-### ExpectedException(Type exceptionType, params Expectation[] expectations) Constructor
-
-```csharp
-ExpectedException expectedException = new ExpectedException(typeof(ArgumentException),
-    new MessageStartsWith("value"),
-    new MessageContains("cannot be", StringComparison.OrdinalIgnoreCase),
-    new MessageEndsWith("null"));
-```
-
-*This is the verbose implementation called when an Expect&lt;TException&gt;.* is implicitly converted to an ExpectedException.
-
-### ExpectedException(Exception exception) Constructor
-
-```csharp
-ExpectedException expectedException = new ExpectedException(new ArgumentException("value cannot be null"));
-// expectedException.Type: typeof(ArgumentException)
-// expectedException.Expectations: MessageEquals("value cannot be null")
-```
-
-*If the source exception provided was previously thrown, then the value returned by expectedException.ToString() will be sourceException.ToString()*
-
-### Implicit Conversion from an exception instance
-
-```csharp
-ExpectedException expectedException = new ArgumentException("value cannot be null");
-// expectedException.Type: typeof(ArgumentException)
-// expectedException.Expectations: MessageEquals("value cannot be null")
-```
-
-*If the source exception provided was previously thrown, then the value returned by expectedException.ToString() will be sourceException.ToString()*
-
-### Implicit Conversion from exception type
-
-```csharp
-ExpectedException expectedException = typeof(ArgumentException);
-// expectedException.Type: typeof(ArgumentException)
-// expectedException.Expectations: empty
-```
