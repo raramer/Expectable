@@ -14,7 +14,6 @@ public class ExpectTests
         => When(
             expect: Expectable.Expect<ArgumentException>.Where
                 .MessageContains(Data.Apple)
-                .MessageContains(Data.Apple, null)
                 .MessageContains(Data.Apple, StringComparison.Ordinal)
                 .MessageContains(Data.Apple, StringComparison.OrdinalIgnoreCase),
             expectedExpectations: [
@@ -41,7 +40,6 @@ public class ExpectTests
         => When(
             expect: Expectable.Expect<ArgumentException>.Where
                 .MessageContainsCount(1, Data.Apple)
-                .MessageContainsCount(1, Data.Apple, null)
                 .MessageContainsCount(1, Data.Apple, StringComparison.Ordinal)
                 .MessageContainsCount(2, Data.Apple, StringComparison.OrdinalIgnoreCase)
                 .MessageContainsCount(3, Data.Apple, StringComparison.OrdinalIgnoreCase),
@@ -70,7 +68,6 @@ public class ExpectTests
         => When(
             expect: Expectable.Expect<ArgumentException>.Where
                 .MessageEndsWith(Data.Apple)
-                .MessageEndsWith(Data.Apple, null)
                 .MessageEndsWith(Data.Apple, StringComparison.Ordinal)
                 .MessageEndsWith(Data.Apple, StringComparison.OrdinalIgnoreCase),
             expectedExpectations: [
@@ -97,7 +94,6 @@ public class ExpectTests
         => When(
             expect: Expectable.Expect<ArgumentException>.Where
                 .MessageEquals(Data.Apple)
-                .MessageEquals(Data.Apple, null)
                 .MessageEquals(Data.Apple, StringComparison.Ordinal)
                 .MessageEquals(Data.Apple, StringComparison.OrdinalIgnoreCase),
             expectedExpectations: [
@@ -110,7 +106,6 @@ public class ExpectTests
         => When(
             expect: Expectable.Expect<ArgumentException>.Where
                 .MessageEquals(Data.Empty)
-                .MessageEquals(Data.Empty, null)
                 .MessageEquals(Data.Empty, StringComparison.Ordinal)
                 .MessageEquals(Data.Empty, StringComparison.OrdinalIgnoreCase),
             expectedExpectations: [
@@ -123,7 +118,6 @@ public class ExpectTests
         => When(
             expect: Expectable.Expect<ArgumentException>.Where
                 .MessageEquals(Data.Null)
-                .MessageEquals(Data.Null, null)
                 .MessageEquals(Data.Null, StringComparison.Ordinal)
                 .MessageEquals(Data.Null, StringComparison.OrdinalIgnoreCase),
             expectedExpectations: [
@@ -136,7 +130,6 @@ public class ExpectTests
         => When(
             expect: Expectable.Expect<ArgumentException>.Where
                 .MessageMatches(Data.Apple)
-                .MessageMatches(Data.Apple, null)
                 .MessageMatches(Data.Apple, RegexOptions.None)
                 .MessageMatches(Data.Apple, RegexOptions.IgnoreCase),
             expectedExpectations: [
@@ -163,7 +156,6 @@ public class ExpectTests
         => When(
             expect: Expectable.Expect<ArgumentException>.Where
                 .MessageStartsWith(Data.Apple)
-                .MessageStartsWith(Data.Apple, null)
                 .MessageStartsWith(Data.Apple, StringComparison.Ordinal)
                 .MessageStartsWith(Data.Apple, StringComparison.OrdinalIgnoreCase),
             expectedExpectations: [

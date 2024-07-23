@@ -32,8 +32,8 @@ public sealed class MessageEqualsTests : ExpectationTestBase
     [InlineData(Data.Apple, StringComparison.Ordinal, Data.Orange, StringComparison.OrdinalIgnoreCase, false)]
     public void Equality(string value, StringComparison? comparisonType, string otherValue, StringComparison? otherComparisonType, bool expectEqual)
         => AssertEqualityWhen(
-           left: new MessageEquals(value, comparisonType),
-           right: new MessageEquals(otherValue, otherComparisonType),
+           left: comparisonType.HasValue ? new MessageEquals(value, comparisonType.Value) : new MessageEquals(value),
+           right: otherComparisonType.HasValue ? new MessageEquals(otherValue, otherComparisonType.Value) : new MessageEquals(otherValue),
            expectEqual: expectEqual);
 
     [Theory]
@@ -212,7 +212,7 @@ public sealed class MessageEqualsTests : ExpectationTestBase
         where TException : Exception
     {
         // arrange
-        var exception = Assert.Throws<TException>(() => new MessageEquals(value, comparisonType));
+        var exception = Assert.Throws<TException>(() => comparisonType.HasValue ? new MessageEquals(value, comparisonType.Value) : new MessageEquals(value));
 
         // assert
         Assert.Equal(expectedMessage, exception.Message);
@@ -221,7 +221,7 @@ public sealed class MessageEqualsTests : ExpectationTestBase
     private void When(string value, StringComparison? comparisonType, string actualMessage, bool expectedIsMatch)
     {
         // arrange
-        var messageEquals = new MessageEquals(value, comparisonType);
+        var messageEquals = comparisonType.HasValue ? new MessageEquals(value, comparisonType.Value) : new MessageEquals(value);
 
         // assert properties
         Assert.Equal(comparisonType ?? StringComparison.Ordinal, messageEquals.ComparisonType);

@@ -35,18 +35,18 @@ internal static class Guard
         return value;
     }
 
-    public static StringComparison? AgainstInvalidStringComparison(StringComparison? value, string parameterName)
+    public static StringComparison AgainstInvalidStringComparison(StringComparison value, string parameterName)
     {
-        if (value.HasValue && !Enum.IsDefined(typeof(StringComparison), value.Value))
+        if (!Enum.IsDefined(typeof(StringComparison), value))
             throw new ArgumentException($@"{parameterName} must be a valid System.StringComparison value.", parameterName);
         return value;
     }
 
     private static readonly char[] DigitsAndMinus = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-'];
 
-    public static RegexOptions? AgainstInvalidRegexOptions(RegexOptions? value, string parameterName)
+    public static RegexOptions AgainstInvalidRegexOptions(RegexOptions value, string parameterName)
     {
-        if (value.HasValue && DigitsAndMinus.Contains(value.Value.ToString()[0]))
+        if (DigitsAndMinus.Contains(value.ToString()[0]))
             throw new ArgumentException($"{parameterName} must be a valid System.Text.RegularExpressions.RegexOptions value.", parameterName);
         return value;
     }

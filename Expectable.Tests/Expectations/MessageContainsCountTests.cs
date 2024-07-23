@@ -75,8 +75,8 @@ public sealed class MessageContainsCountTests : ExpectationTestBase
     [InlineData(0, Data.Apple, StringComparison.Ordinal, 2, Data.Orange, StringComparison.OrdinalIgnoreCase, false)]
     public void Equality(int expectedCount, string value, StringComparison? comparisonType, int otherExpectedCount, string otherValue, StringComparison? otherComparisonType, bool expectEqual)
         => AssertEqualityWhen(
-           left: new MessageContainsCount(expectedCount, value, comparisonType),
-           right: new MessageContainsCount(otherExpectedCount, otherValue, otherComparisonType),
+           left: comparisonType.HasValue ? new MessageContainsCount(expectedCount, value, comparisonType.Value) : new MessageContainsCount(expectedCount, value),
+           right: otherComparisonType.HasValue ? new MessageContainsCount(otherExpectedCount, otherValue, otherComparisonType.Value) : new MessageContainsCount(otherExpectedCount, otherValue),
            expectEqual: expectEqual);
 
     [Fact]
@@ -353,7 +353,7 @@ public sealed class MessageContainsCountTests : ExpectationTestBase
         where TException : Exception
     {
         // arrange
-        var exception = Assert.Throws<TException>(() => new MessageContainsCount(expectedCount, value, comparisonType));
+        var exception = Assert.Throws<TException>(() => comparisonType.HasValue ? new MessageContainsCount(expectedCount, value, comparisonType.Value) : new MessageContainsCount(expectedCount, value));
 
         // assert
         Assert.Equal(expectedMessage, exception.Message);
@@ -362,7 +362,7 @@ public sealed class MessageContainsCountTests : ExpectationTestBase
     private void When(int expectedCount, string value, StringComparison? comparisonType, string actualMessage, bool expectedIsMatch)
     {
         // arrange
-        var messageContainsCount = new MessageContainsCount(expectedCount, value, comparisonType);
+        var messageContainsCount = comparisonType.HasValue ? new MessageContainsCount(expectedCount, value, comparisonType.Value) : new MessageContainsCount(expectedCount, value);
 
         // assert properties
         Assert.Equal(comparisonType ?? StringComparison.Ordinal, messageContainsCount.ComparisonType);

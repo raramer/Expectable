@@ -32,8 +32,8 @@ public sealed class MessageEndsWithTests : ExpectationTestBase
     [InlineData(Data.Apple, StringComparison.Ordinal, Data.Orange, StringComparison.OrdinalIgnoreCase, false)]
     public void Equality(string value, StringComparison? comparisonType, string otherValue, StringComparison? otherComparisonType, bool expectEqual)
         => AssertEqualityWhen(
-           left: new MessageEndsWith(value, comparisonType),
-           right: new MessageEndsWith(otherValue, otherComparisonType),
+           left: comparisonType.HasValue ? new MessageEndsWith(value, comparisonType.Value) : new MessageEndsWith(value),
+           right: otherComparisonType.HasValue ? new MessageEndsWith(otherValue, otherComparisonType.Value) : new MessageEndsWith(otherValue),
            expectEqual: expectEqual);
 
     [Theory]
@@ -134,7 +134,7 @@ public sealed class MessageEndsWithTests : ExpectationTestBase
         where TException : Exception
     {
         // arrange
-        var exception = Assert.Throws<TException>(() => new MessageEndsWith(value, comparisonType));
+        var exception = Assert.Throws<TException>(() => comparisonType.HasValue ? new MessageEndsWith(value, comparisonType.Value) : new MessageEndsWith(value));
 
         // assert
         Assert.Equal(expectedMessage, exception.Message);
@@ -143,7 +143,7 @@ public sealed class MessageEndsWithTests : ExpectationTestBase
     private void When(string value, StringComparison? comparisonType, string actualMessage, bool expectedIsMatch)
     {
         // arrange
-        var messageEndsWith = new MessageEndsWith(value, comparisonType);
+        var messageEndsWith = comparisonType.HasValue ? new MessageEndsWith(value, comparisonType.Value) : new MessageEndsWith(value);
 
         // assert properties
         Assert.Equal(comparisonType ?? StringComparison.Ordinal, messageEndsWith.ComparisonType);

@@ -40,9 +40,9 @@ public sealed class Expect<TException> where TException : Exception
     /// Checks that the exception message contains a specific string value.
     /// </summary>
     /// <param name="value">The string to seek.</param>
-    /// <param name="comparisonType">One of the enumeration values that determines how the exception message and value are compared. (Default is StringComparison.Ordinal)</param>
+    /// <param name="comparisonType">One of the enumeration values that determines how the exception message and value are compared.</param>
     /// <returns>Expect<typeparamref name="TException"/></returns>
-    public Expect<TException> MessageContains(string value, StringComparison? comparisonType)
+    public Expect<TException> MessageContains(string value, StringComparison comparisonType)
         => AddExpectation(new MessageContains(value, comparisonType));
 
     /// <summary>
@@ -59,9 +59,9 @@ public sealed class Expect<TException> where TException : Exception
     /// </summary>
     /// <param name="expectedCount">The expected number of instances of value within the exception message.</param>
     /// <param name="value">The string to seek.</param>
-    /// <param name="comparisonType">One of the enumeration values that determines how the exception message and value are compared. (Default is StringComparison.Ordinal)</param>
+    /// <param name="comparisonType">One of the enumeration values that determines how the exception message and value are compared.</param>
     /// <returns>Expe</returns>
-    public Expect<TException> MessageContainsCount(int expectedCount, string value, StringComparison? comparisonType)
+    public Expect<TException> MessageContainsCount(int expectedCount, string value, StringComparison comparisonType)
         => AddExpectation(new MessageContainsCount(expectedCount, value, comparisonType));
 
     /// <summary>
@@ -76,9 +76,9 @@ public sealed class Expect<TException> where TException : Exception
     /// Checks that the exception message ends with a specific string value.
     /// </summary>
     /// <param name="value">The string to compare to the substring at the end of the exception message.</param>
-    /// <param name="comparisonType">One of the enumeration values that determines how the exception message and value are compared. (Default is StringComparison.Ordinal)</param>
+    /// <param name="comparisonType">One of the enumeration values that determines how the exception message and value are compared.</param>
     /// <returns>Expect<typeparamref name="TException"/></returns>
-    public Expect<TException> MessageEndsWith(string value, StringComparison? comparisonType)
+    public Expect<TException> MessageEndsWith(string value, StringComparison comparisonType)
         => AddExpectation(new MessageEndsWith(value, comparisonType));
 
     /// <summary>
@@ -93,9 +93,9 @@ public sealed class Expect<TException> where TException : Exception
     /// Checks that the exception message equals a specific string value.
     /// </summary>
     /// <param name="value">The string to compare to the exception message.</param>
-    /// <param name="comparisonType">One of the enumeration values that determines how the exception message and value are compared. (Default is StringComparison.Ordinal)</param>
+    /// <param name="comparisonType">One of the enumeration values that determines how the exception message and value are compared.</param>
     /// <returns>Expect<typeparamref name="TException"/></returns>
-    public Expect<TException> MessageEquals(string value, StringComparison? comparisonType)
+    public Expect<TException> MessageEquals(string value, StringComparison comparisonType)
         => AddExpectation(new MessageEquals(value, comparisonType));
 
     /// <summary>
@@ -110,9 +110,9 @@ public sealed class Expect<TException> where TException : Exception
     /// Checks that the exception message matches a specific regular expression pattern.
     /// </summary>
     /// <param name="pattern">The regular expression pattern to match.</param>
-    /// <param name="options">A bitwise combination of the enumeration values that provide options for matching. (Default is RegexOptions.None)</param>
+    /// <param name="options">A bitwise combination of the enumeration values that provide options for matching.</param>
     /// <returns></returns>
-    public Expect<TException> MessageMatches(string pattern, RegexOptions? options)
+    public Expect<TException> MessageMatches(string pattern, RegexOptions options)
         => AddExpectation(new MessageMatches(pattern, options));
 
     /// <summary>
@@ -127,9 +127,9 @@ public sealed class Expect<TException> where TException : Exception
     /// Checks that the exception message starts with a specific string value.
     /// </summary>
     /// <param name="value">The string to compare to the substring at the start of the exception message.</param>
-    /// <param name="comparisonType">One of the enumeration values that determines how the exception message and value are compared. (Default is StringComparison.Ordinal)</param>
+    /// <param name="comparisonType">One of the enumeration values that determines how the exception message and value are compared.</param>
     /// <returns>Expect<typeparamref name="TException"/></returns>
-    public Expect<TException> MessageStartsWith(string value, StringComparison? comparisonType)
+    public Expect<TException> MessageStartsWith(string value, StringComparison comparisonType)
         => AddExpectation(new MessageStartsWith(value, comparisonType));
 
     private Expect<TException> AddExpectation(Expectation expectation)

@@ -30,8 +30,12 @@ public sealed record MessageContainsCount : Expectation
     /// </summary>
     /// <param name="expectedCount">The expected number of instances of value within the exception message.</param>
     /// <param name="value">The string to seek.</param>
-    public MessageContainsCount(int expectedCount, string value) : this(expectedCount, value, null)
+    public MessageContainsCount(int expectedCount, string value)
     {
+        ExpectedCount = Guard.AgainstNegative(expectedCount, nameof(expectedCount));
+        Value = Guard.AgainstNullOrEmpty(value, nameof(value));
+        ComparisonType = DefaultStringComparison;
+        OriginalComparisonType = null;
     }
 
     /// <summary>
@@ -39,12 +43,12 @@ public sealed record MessageContainsCount : Expectation
     /// </summary>
     /// <param name="expectedCount">The expected number of instances of value within the exception message.</param>
     /// <param name="value">The string to seek.</param>
-    /// <param name="comparisonType">One of the enumeration values that determines how the exception message and value are compared. (Default is StringComparison.Ordinal)</param>
-    public MessageContainsCount(int expectedCount, string value, StringComparison? comparisonType)
+    /// <param name="comparisonType">One of the enumeration values that determines how the exception message and value are compared.</param>
+    public MessageContainsCount(int expectedCount, string value, StringComparison comparisonType)
     {
         ExpectedCount = Guard.AgainstNegative(expectedCount, nameof(expectedCount));
         Value = Guard.AgainstNullOrEmpty(value, nameof(value));
-        ComparisonType = Guard.AgainstInvalidStringComparison(comparisonType, nameof(comparisonType)) ?? DefaultStringComparison;
+        ComparisonType = Guard.AgainstInvalidStringComparison(comparisonType, nameof(comparisonType));
         OriginalComparisonType = comparisonType;
     }
 

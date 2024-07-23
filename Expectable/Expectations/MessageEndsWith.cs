@@ -24,19 +24,22 @@ public sealed record MessageEndsWith : Expectation
     /// Defines a new MessageEndsWith expectation.
     /// </summary>
     /// <param name="value">The string to compare to the substring at the end of the exception message.</param>
-    public MessageEndsWith(string value) : this(value, null)
+    public MessageEndsWith(string value)
     {
+        Value = Guard.AgainstNullOrEmpty(value, nameof(value));
+        ComparisonType = DefaultStringComparison;
+        OriginalComparisonType = null;
     }
 
     /// <summary>
     /// Defines a new MessageEndsWith expectation.
     /// </summary>
     /// <param name="value">The string to compare to the substring at the end of the exception message.</param>
-    /// <param name="comparisonType">One of the enumeration values that determines how the exception message and value are compared. (Default is StringComparison.Ordinal)</param>
-    public MessageEndsWith(string value, StringComparison? comparisonType)
+    /// <param name="comparisonType">One of the enumeration values that determines how the exception message and value are compared.</param>
+    public MessageEndsWith(string value, StringComparison comparisonType)
     {
         Value = Guard.AgainstNullOrEmpty(value, nameof(value));
-        ComparisonType = Guard.AgainstInvalidStringComparison(comparisonType, nameof(comparisonType)) ?? DefaultStringComparison;
+        ComparisonType = Guard.AgainstInvalidStringComparison(comparisonType, nameof(comparisonType));
         OriginalComparisonType = comparisonType;
     }
 

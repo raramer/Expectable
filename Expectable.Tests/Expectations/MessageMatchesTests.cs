@@ -44,8 +44,8 @@ public sealed class MessageMatchesTests : ExpectationTestBase
     [InlineData(Data.Apple, RegexOptions.None, Data.Orange, RegexOptions.NonBacktracking, false)]
     public void Equality(string value, RegexOptions? options, string otherValue, RegexOptions? otherOptions, bool expectEqual)
         => AssertEqualityWhen(
-           left: new MessageMatches(value, options),
-           right: new MessageMatches(otherValue, otherOptions),
+           left: options.HasValue ? new MessageMatches(value, options.Value) : new MessageMatches(value),
+           right: otherOptions.HasValue ? new MessageMatches(otherValue, otherOptions.Value) : new MessageMatches(otherValue),
            expectEqual: expectEqual);
 
     [Fact]
@@ -154,7 +154,7 @@ public sealed class MessageMatchesTests : ExpectationTestBase
         where TException : Exception
     {
         // arrange
-        var exception = Assert.Throws<TException>(() => new MessageMatches(pattern, options));
+        var exception = Assert.Throws<TException>(() => options.HasValue ? new MessageMatches(pattern, options.Value) : new MessageMatches(pattern));
 
         // assert
         Assert.Equal(expectedMessage, exception.Message);
@@ -163,7 +163,7 @@ public sealed class MessageMatchesTests : ExpectationTestBase
     private void When(string pattern, RegexOptions? options, string actualMessage, bool expectedIsMatch)
     {
         // arrange
-        var messageMatches = new MessageMatches(pattern, options);
+        var messageMatches = options.HasValue ? new MessageMatches(pattern, options.Value) : new MessageMatches(pattern);
 
         // assert properties
         Assert.Equal(options ?? RegexOptions.None, messageMatches.Options);

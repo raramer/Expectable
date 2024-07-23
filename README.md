@@ -163,51 +163,51 @@ Expectations allow you to confirm a list of expected conditions are fulfilled by
 ### MessageContains
 Checks that the exception message contains a specific string value.
 
-| Parameter | Description | Restrictions | Default |
-| --- | --- | --- | --- |
-| value | The string to seek. | Not null or empty | N/A |
-| comparisonType | One of the enumeration values that determines how the exception message and value are compared. | Null or a valid System.StringComparison | StringComparison.Ordinal |
+| Parameter | Description | Restrictions |
+| --- | --- | --- |
+| value | The string to seek. | Not null or empty |
+| comparisonType | One of the enumeration values that determines how the exception message and value are compared. | A valid System.StringComparison |
 
 ### MessageContainsCount
 Checks that the exception message contains a specific string value a specific number of times.
 
-| Parameter | Description | Restrictions | Default |
-| --- | --- | --- | --- |
-| expectedCount | The expected number of instances of value within the exception message. | Greater than or equal to 0 | N/A |
-| value | The string to seek. | Not null or empty | N/A |
-| comparisonType | One of the enumeration values that determines how the exception message and value are compared. | Null or a valid System.StringComparison | StringComparison.Ordinal |
+| Parameter | Description | Restrictions |
+| --- | --- | --- |
+| expectedCount | The expected number of instances of value within the exception message. | Greater than or equal to 0 |
+| value | The string to seek. | Not null or empty |
+| comparisonType | One of the enumeration values that determines how the exception message and value are compared. | A valid System.StringComparison |
 
 ### MessageEndsWith
 Checks that the exception message ends with a specific string value.
 
-| Parameter | Description | Restrictions | Default |
-| --- | --- | --- | --- |
-| value | The string to compare to the substring at the end of the exception message. | Not null or empty | N/A |
-| comparisonType | One of the enumeration values that determines how the exception message and value are compared. | Null or a valid System.StringComparison | StringComparison.Ordinal |
+| Parameter | Description | Restrictions |
+| --- | --- | --- |
+| value | The string to compare to the substring at the end of the exception message. | Not null or empty |
+| comparisonType | One of the enumeration values that determines how the exception message and value are compared. | A valid System.StringComparison |
 
 ### MessageEquals
 Checks that the exception message equals a specific string value.
 
-| Parameter | Description | Restrictions | Default |
-| --- | --- | --- | --- |
-| value | The string to compare to the exception message. | None | N/A |
-| comparisonType | One of the enumeration values that determines how the exception message and value are compared. | Null or a valid System.StringComparison | StringComparison.Ordinal |
+| Parameter | Description | Restrictions |
+| --- | --- | --- |
+| value | The string to compare to the exception message. | None |
+| comparisonType | One of the enumeration values that determines how the exception message and value are compared. | A valid System.StringComparison |
 
 ### MessageMatches
 Checks that the exception message matches a specific regular expression pattern.
 
-| Parameter | Description | Restrictions | Default |
-| --- | --- | --- | --- |
-| pattern | The regular expression pattern to match. | Not null or empty and a valid regular expression | N/A |
-| options | A bitwise combination of the enumeration values that provide options for matching. | Null or a valid System.Text.RegularExpressions.RegexOptions | RegexOptions.None |
+| Parameter | Description | Restrictions |
+| --- | --- | --- |
+| pattern | The regular expression pattern to match. | Not null or empty and a valid regular expression |
+| options | A bitwise combination of the enumeration values that provide options for matching. | A valid System.Text.RegularExpressions.RegexOptions |
 
 ### MessageStartsWith
 Checks that the exception message starts with a specific string value.
 
-| Parameter | Description | Restrictions | Default |
-| --- | --- | --- | --- |
-| value | The string to compare to the substring at the start of the exception message. | Not null or empty | N/A |
-| comparisonType | One of the enumeration values that determines how the exception message and value are compared. | Null or a valid System.StringComparison | StringComparison.Ordinal |
+| Parameter | Description | Restrictions |
+| --- | --- | --- |
+| value | The string to compare to the substring at the start of the exception message. | Not null or empty |
+| comparisonType | One of the enumeration values that determines how the exception message and value are compared. | A valid System.StringComparison |
 
 ## ToString()
 
