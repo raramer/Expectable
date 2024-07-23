@@ -30,8 +30,17 @@ public sealed record MessageContainsCount : Expectation
     /// </summary>
     /// <param name="expectedCount">The expected number of instances of value within the exception message.</param>
     /// <param name="value">The string to seek.</param>
+    public MessageContainsCount(int expectedCount, string value) : this(expectedCount, value, null)
+    {
+    }
+
+    /// <summary>
+    /// Defines a new MessageContainsCount expectation.
+    /// </summary>
+    /// <param name="expectedCount">The expected number of instances of value within the exception message.</param>
+    /// <param name="value">The string to seek.</param>
     /// <param name="comparisonType">One of the enumeration values that determines how the exception message and value are compared. (Default is StringComparison.Ordinal)</param>
-    public MessageContainsCount(int expectedCount, string value, StringComparison? comparisonType = null)
+    public MessageContainsCount(int expectedCount, string value, StringComparison? comparisonType)
     {
         ExpectedCount = Guard.AgainstNegative(expectedCount, nameof(expectedCount));
         Value = Guard.AgainstNullOrEmpty(value, nameof(value));

@@ -24,8 +24,16 @@ public sealed record MessageEquals : Expectation
     /// Defines a new MessageEquals expectation.
     /// </summary>
     /// <param name="value">The string to compare to the exception message.</param>
+    public MessageEquals(string value) : this(value, null)
+    {
+    }
+
+    /// <summary>
+    /// Defines a new MessageEquals expectation.
+    /// </summary>
+    /// <param name="value">The string to compare to the exception message.</param>
     /// <param name="comparisonType">One of the enumeration values that determines how the exception message and value are compared. (Default is StringComparison.Ordinal)</param>
-    public MessageEquals(string value, StringComparison? comparisonType = null)
+    public MessageEquals(string value, StringComparison? comparisonType)
     {
         Value = value; // Don't guard here so that we can check for explicit null or empty
         ComparisonType = Guard.AgainstInvalidStringComparison(comparisonType, nameof(comparisonType)) ?? DefaultStringComparison;

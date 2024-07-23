@@ -24,8 +24,16 @@ public sealed record MessageContains : Expectation
     /// Defines a new MessageContains expectation.
     /// </summary>
     /// <param name="value">The string to seek.</param>
+    public MessageContains(string value) : this(value, null)
+    {
+    }
+
+    /// <summary>
+    /// Defines a new MessageContains expectation.
+    /// </summary>
+    /// <param name="value">The string to seek.</param>
     /// <param name="comparisonType">One of the enumeration values that determines how the exception message and value are compared. (Default is StringComparison.Ordinal)</param>
-    public MessageContains(string value, StringComparison? comparisonType = null)
+    public MessageContains(string value, StringComparison? comparisonType)
     {
         Value = Guard.AgainstNullOrEmpty(value, nameof(value));
         ComparisonType = Guard.AgainstInvalidStringComparison(comparisonType, nameof(comparisonType)) ?? DefaultStringComparison;

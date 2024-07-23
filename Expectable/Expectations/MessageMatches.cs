@@ -25,8 +25,16 @@ public sealed record MessageMatches : Expectation
     /// Defines a new MessageMatches expectation.
     /// </summary>
     /// <param name="pattern">The regular expression pattern to match.</param>
+    public MessageMatches(string pattern) : this(pattern, null)
+    {
+    }
+
+    /// <summary>
+    /// Defines a new MessageMatches expectation.
+    /// </summary>
+    /// <param name="pattern">The regular expression pattern to match.</param>
     /// <param name="options">A bitwise combination of the enumeration values that provide options for matching. (Default is RegexOptions.None)</param>
-    public MessageMatches(string pattern, RegexOptions? options = null)
+    public MessageMatches(string pattern, RegexOptions? options)
     {
         Pattern = Guard.AgainstInvalidRegexPattern(pattern, nameof(pattern));
         Options = Guard.AgainstInvalidRegexOptions(options, nameof(options)) ?? DefaultRegexOptions;

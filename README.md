@@ -161,34 +161,52 @@ Expectations allow you to confirm a list of expected conditions are fulfilled by
 
 ### MessageContains
 Checks that the exception message contains a specific string value.
-* **value** : The string to seek.
-* **comparisonType** : One of the enumeration values that determines how the exception message and value are compared. (Default is StringComparison.Ordinal)
+
+| Parameter | Type | Required | Description | Restrictions | Default |
+| - |
+| value | string | yes | The string to seek. | Cannot be null or empty. | N/A |
+| comparisonType | System.StringComparison? | no | One of the enumeration values that determines how the exception message and value are compared. | null or a valid StringComparison | StringComparison.Ordinal |
 
 ### MessageContainsCount
 Checks that the exception message contains a specific string value a specific number of times.
-* **expectedCount** : The expected number of instances of value within the exception message.
-* **value** : The string to seek.
-* **comparisonType** : One of the enumeration values that determines how the exception message and value are compared. (Default is StringComparison.Ordinal)
+
+| Parameter | Type | Required | Description | Restrictions | Default |
+| - |
+| expectedCount | int | yes | The expected number of instances of value within the exception message. | Greater than or equal to 0 | N/A |
+| value | string | yes | The string to seek. | Cannot be null or empty. | N/A |
+| comparisonType | System.StringComparison? | no | One of the enumeration values that determines how the exception message and value are compared. | null or a valid StringComparison | StringComparison.Ordinal |
 
 ### MessageEndsWith
 Checks that the exception message ends with a specific string value.
-* **value** : The string to compare to the substring at the end of the exception message.
-* **comparisonType** : One of the enumeration values that determines how the exception message and value are compared. (Default is StringComparison.Ordinal)
+
+| Parameter | Type | Required | Description | Restrictions | Default |
+| - |
+| value | string | yes | The string to compare to the substring at the end of the exception message. | Cannot be null or empty. | N/A |
+| comparisonType | System.StringComparison? | no | One of the enumeration values that determines how the exception message and value are compared. | null or a valid StringComparison | StringComparison.Ordinal |
 
 ### MessageEquals
 Checks that the exception message equals a specific string value.
-* **value** : The string to compare to the exception message..
-* **comparisonType** : One of the enumeration values that determines how the exception message and value are compared. (Default is StringComparison.Ordinal)
+
+| Parameter | Type | Required | Description | Restrictions | Default |
+| - |
+| value | string | yes | The string to compare to the exception message. | None | N/A |
+| comparisonType | System.StringComparison? | no | One of the enumeration values that determines how the exception message and value are compared. | null or a valid StringComparison | StringComparison.Ordinal |
 
 ### MessageMatches
 Checks that the exception message matches a specific regular expression pattern.
-* **pattern** : The regular expression pattern to match.
-* **options** : A bitwise combination of the enumeration values that provide options for matching. (Default is RegexOptions.None)
+
+| Parameter | Type | Required | Description | Restrictions | Default |
+| - |
+| pattern | string | yes | The regular expression pattern to match. | Cannot be null or empty. Must be a valid regular expression. | N/A |
+| options | System.Text.RegularExpressions.RegexOptions? | no | A bitwise combination of the enumeration values that provide options for matching. | null or a valid RegexOptions | RegexOptions.None |
 
 ### MessageStartsWith
 Checks that the exception message starts with a specific string value.
-* **value** : The string to compare to the substring at the start of the exception message.
-* **comparisonType** : One of the enumeration values that determines how the exception message and value are compared. (Default is StringComparison.Ordinal)
+
+| Parameter | Type | Required | Description | Restrictions | Default |
+| - |
+| value | string | yes | The string to compare to the substring at the start of the exception message. | Cannot be null or empty. | N/A |
+| comparisonType | System.StringComparison? | no | One of the enumeration values that determines how the exception message and value are compared. | null or a valid StringComparison | StringComparison.Ordinal |
 
 ## ToString()
 
