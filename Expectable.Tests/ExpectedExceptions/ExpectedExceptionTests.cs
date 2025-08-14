@@ -1,8 +1,6 @@
-﻿using System.Text;
+﻿using Expectable.Expectations;
+using System.Text;
 using System.Text.RegularExpressions;
-using Expectable.Expectations;
-using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
-using Xunit.Abstractions;
 
 namespace Expectable.Tests.ExpectedExceptions;
 
@@ -29,7 +27,7 @@ public class ExpectedExceptionTests
     [InlineData(Data.Apple_OrangePear, false)]
     [InlineData(Data.AppleOrangePear_, false)]
     [InlineData(Data.Apple_apple_Apple, false)]
-    public void Exception_Is_Not_Null(string message, bool expectedEquals)
+    public void Exception_Is_Not_Null(string? message, bool expectedEquals)
         => When(
             expectedException: new ExpectedException(new ArgumentException(Data.AppleOrangePear)),
             expectedType: typeof(ArgumentException),
@@ -52,7 +50,7 @@ public class ExpectedExceptionTests
     [InlineData(Data.Apple_OrangePear, true)]
     [InlineData(Data.AppleOrangePear_, true)]
     [InlineData(Data.Apple_apple_Apple, true)]
-    public void Expectations_Contains_Duplicate_Expectations(string message, bool expectedEquals)
+    public void Expectations_Contains_Duplicate_Expectations(string? message, bool expectedEquals)
         => When(
             exceptionType: typeof(ArgumentException),
             expectations: [
@@ -78,7 +76,7 @@ public class ExpectedExceptionTests
     [InlineData(Data.Apple_OrangePear, false)]
     [InlineData(Data.AppleOrangePear_, false)]
     [InlineData(Data.Apple_apple_Apple, false)]
-    public void Expectations_Contains_Null_Expectations(string message, bool expectedEquals)
+    public void Expectations_Contains_Null_Expectations(string? message, bool expectedEquals)
         => When(
             exceptionType: typeof(ArgumentException),
             expectations: [
@@ -104,7 +102,7 @@ public class ExpectedExceptionTests
     [InlineData(Data.Apple_OrangePear, false)]
     [InlineData(Data.AppleOrangePear_, false)]
     [InlineData(Data.Apple_apple_Apple, false)]
-    public void Expectations_Contains_Single_Expectation(string message, bool expectedEquals)
+    public void Expectations_Contains_Single_Expectation(string? message, bool expectedEquals)
         => When(exceptionType: typeof(ArgumentException),
             expectations: [
                 new MessageEquals(Data.Apple, StringComparison.OrdinalIgnoreCase)
@@ -127,7 +125,7 @@ public class ExpectedExceptionTests
     [InlineData(Data.Apple_OrangePear, true)]
     [InlineData(Data.AppleOrangePear_, true)]
     [InlineData(Data.Apple_apple_Apple, false)]
-    public void Expectations_Contains_Unique_Expectations(string message, bool expectedEquals)
+    public void Expectations_Contains_Unique_Expectations(string? message, bool expectedEquals)
         => When(exceptionType: typeof(ArgumentException),
             expectations: [
                 new MessageContains(Data.Apple),
@@ -152,7 +150,7 @@ public class ExpectedExceptionTests
     [InlineData(Data.Apple_OrangePear, true)]
     [InlineData(Data.AppleOrangePear_, true)]
     [InlineData(Data.Apple_apple_Apple, true)]
-    public void Expectations_Is_Empty(string message, bool expectedEquals)
+    public void Expectations_Is_Empty(string? message, bool expectedEquals)
         => When(exceptionType: typeof(ArgumentException),
             expectations: Array.Empty<Expectation>(),
             expectedExpectationsCount: 0,
@@ -173,7 +171,7 @@ public class ExpectedExceptionTests
     [InlineData(Data.Apple_OrangePear, true)]
     [InlineData(Data.AppleOrangePear_, true)]
     [InlineData(Data.Apple_apple_Apple, true)]
-    public void Expectations_Is_Null(string message, bool expectedEquals)
+    public void Expectations_Is_Null(string? message, bool expectedEquals)
         => When(exceptionType: typeof(ArgumentException),
             expectations: null,
             expectedExpectationsCount: 0,
@@ -194,7 +192,7 @@ public class ExpectedExceptionTests
     [InlineData(Data.Apple_OrangePear, false)]
     [InlineData(Data.AppleOrangePear_, false)]
     [InlineData(Data.Apple_apple_Apple, false)]
-    public void Implicit_Conversion_Exception_Is_Not_Null(string message, bool expectedEquals)
+    public void Implicit_Conversion_Exception_Is_Not_Null(string? message, bool expectedEquals)
         => When(
             expectedException: new ArgumentException(Data.AppleOrangePear),
             expectedType: typeof(ArgumentException),
@@ -227,7 +225,7 @@ public class ExpectedExceptionTests
     [InlineData(Data.Apple_OrangePear, true)]
     [InlineData(Data.AppleOrangePear_, true)]
     [InlineData(Data.Apple_apple_Apple, true)]
-    public void Implicit_Conversion_Type_Is_Not_Null(string message, bool expectedEquals)
+    public void Implicit_Conversion_Type_Is_Not_Null(string? message, bool expectedEquals)
         => When(
             expectedException: typeof(ArgumentException),
             expectedType: typeof(ArgumentException),

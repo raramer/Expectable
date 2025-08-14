@@ -123,7 +123,7 @@ public sealed class MessageContainsCountTests : ExpectationTestBase
     [InlineData(StringComparison.OrdinalIgnoreCase, Data.OrangeApplePear, false)]
     [InlineData(StringComparison.OrdinalIgnoreCase, Data.OrangePearApple, false)]
     [InlineData(StringComparison.OrdinalIgnoreCase, Data.Apple_apple_Apple, false)]
-    public void Value_Is_Apple_ExpectedCount_Is_0(StringComparison? comparisonType, string actualMessage, bool expectedIsMatch)
+    public void Value_Is_Apple_ExpectedCount_Is_0(StringComparison? comparisonType, string? actualMessage, bool expectedIsMatch)
         => When(0, Data.Apple, comparisonType, actualMessage, expectedIsMatch);
 
     [Theory]
@@ -166,7 +166,7 @@ public sealed class MessageContainsCountTests : ExpectationTestBase
     [InlineData(StringComparison.OrdinalIgnoreCase, Data.OrangeApplePear, true)]
     [InlineData(StringComparison.OrdinalIgnoreCase, Data.OrangePearApple, true)]
     [InlineData(StringComparison.OrdinalIgnoreCase, Data.Apple_apple_Apple, false)]
-    public void Value_Is_Apple_ExpectedCount_Is_1(StringComparison? comparisonType, string actualMessage, bool expectedIsMatch)
+    public void Value_Is_Apple_ExpectedCount_Is_1(StringComparison? comparisonType, string? actualMessage, bool expectedIsMatch)
         => When(1, Data.Apple, comparisonType, actualMessage, expectedIsMatch);
 
     [Theory]
@@ -209,7 +209,7 @@ public sealed class MessageContainsCountTests : ExpectationTestBase
     [InlineData(StringComparison.OrdinalIgnoreCase, Data.OrangeApplePear, false)]
     [InlineData(StringComparison.OrdinalIgnoreCase, Data.OrangePearApple, false)]
     [InlineData(StringComparison.OrdinalIgnoreCase, Data.Apple_apple_Apple, false)]
-    public void Value_Is_Apple_ExpectedCount_Is_2(StringComparison? comparisonType, string actualMessage, bool expectedIsMatch)
+    public void Value_Is_Apple_ExpectedCount_Is_2(StringComparison? comparisonType, string? actualMessage, bool expectedIsMatch)
         => When(2, Data.Apple, comparisonType, actualMessage, expectedIsMatch);
 
     [Fact]
@@ -260,7 +260,7 @@ public sealed class MessageContainsCountTests : ExpectationTestBase
     [InlineData(StringComparison.OrdinalIgnoreCase, Data.OrangeApplePear, true)]
     [InlineData(StringComparison.OrdinalIgnoreCase, Data.OrangePearApple, true)]
     [InlineData(StringComparison.OrdinalIgnoreCase, Data.Apple_apple_Apple, false)]
-    public void Value_Is_Whitespace_ExpectedCount_Is_0(StringComparison? comparisonType, string actualMessage, bool expectedIsMatch)
+    public void Value_Is_Whitespace_ExpectedCount_Is_0(StringComparison? comparisonType, string? actualMessage, bool expectedIsMatch)
         => When(0, Data.Whitespace, comparisonType, actualMessage, expectedIsMatch);
 
     [Theory]
@@ -303,7 +303,7 @@ public sealed class MessageContainsCountTests : ExpectationTestBase
     [InlineData(StringComparison.OrdinalIgnoreCase, Data.OrangeApplePear, false)]
     [InlineData(StringComparison.OrdinalIgnoreCase, Data.OrangePearApple, false)]
     [InlineData(StringComparison.OrdinalIgnoreCase, Data.Apple_apple_Apple, false)]
-    public void Value_Is_Whitespace_ExpectedCount_Is_1(StringComparison? comparisonType, string actualMessage, bool expectedIsMatch)
+    public void Value_Is_Whitespace_ExpectedCount_Is_1(StringComparison? comparisonType, string? actualMessage, bool expectedIsMatch)
         => When(1, Data.Whitespace, comparisonType, actualMessage, expectedIsMatch);
 
     [Theory]
@@ -346,10 +346,10 @@ public sealed class MessageContainsCountTests : ExpectationTestBase
     [InlineData(StringComparison.OrdinalIgnoreCase, Data.OrangeApplePear, false)]
     [InlineData(StringComparison.OrdinalIgnoreCase, Data.OrangePearApple, false)]
     [InlineData(StringComparison.OrdinalIgnoreCase, Data.Apple_apple_Apple, true)]
-    public void Value_Is_Whitespace_ExpectedCount_Is_2(StringComparison? comparisonType, string actualMessage, bool expectedIsMatch)
+    public void Value_Is_Whitespace_ExpectedCount_Is_2(StringComparison? comparisonType, string? actualMessage, bool expectedIsMatch)
         => When(2, Data.Whitespace, comparisonType, actualMessage, expectedIsMatch);
 
-    private void Expect<TException>(int expectedCount, string? value, StringComparison? comparisonType, string expectedMessage)
+    private void Expect<TException>(int expectedCount, string? value, StringComparison? comparisonType, string? expectedMessage)
         where TException : Exception
     {
         // arrange
@@ -359,7 +359,7 @@ public sealed class MessageContainsCountTests : ExpectationTestBase
         Assert.Equal(expectedMessage, exception.Message);
     }
 
-    private void When(int expectedCount, string value, StringComparison? comparisonType, string actualMessage, bool expectedIsMatch)
+    private void When(int expectedCount, string value, StringComparison? comparisonType, string? actualMessage, bool expectedIsMatch)
     {
         // arrange
         var messageContainsCount = comparisonType.HasValue ? new MessageContainsCount(expectedCount, value, comparisonType.Value) : new MessageContainsCount(expectedCount, value);

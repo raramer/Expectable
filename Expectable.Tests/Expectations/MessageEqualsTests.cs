@@ -76,7 +76,7 @@ public sealed class MessageEqualsTests : ExpectationTestBase
     [InlineData(StringComparison.OrdinalIgnoreCase, Data.Apple_OrangePear, false)]
     [InlineData(StringComparison.OrdinalIgnoreCase, Data.AppleOrangePear_, false)]
     [InlineData(StringComparison.OrdinalIgnoreCase, Data.Apple_apple_Apple, false)]
-    public void Value_Is_Apple(StringComparison? comparisonType, string actualMessage, bool expectedIsMatch)
+    public void Value_Is_Apple(StringComparison? comparisonType, string? actualMessage, bool expectedIsMatch)
         => When(Data.Apple, comparisonType, actualMessage, expectedIsMatch);
 
     [Theory]
@@ -119,7 +119,7 @@ public sealed class MessageEqualsTests : ExpectationTestBase
     [InlineData(StringComparison.OrdinalIgnoreCase, Data.Apple_OrangePear, false)]
     [InlineData(StringComparison.OrdinalIgnoreCase, Data.AppleOrangePear_, false)]
     [InlineData(StringComparison.OrdinalIgnoreCase, Data.Apple_apple_Apple, false)]
-    public void Value_Is_Empty(StringComparison? comparisonType, string actualMessage, bool expectedIsMatch)
+    public void Value_Is_Empty(StringComparison? comparisonType, string? actualMessage, bool expectedIsMatch)
         => When(Data.Empty, comparisonType, actualMessage, expectedIsMatch);
 
     [Theory]
@@ -162,7 +162,7 @@ public sealed class MessageEqualsTests : ExpectationTestBase
     [InlineData(StringComparison.OrdinalIgnoreCase, Data.Apple_OrangePear, false)]
     [InlineData(StringComparison.OrdinalIgnoreCase, Data.AppleOrangePear_, false)]
     [InlineData(StringComparison.OrdinalIgnoreCase, Data.Apple_apple_Apple, false)]
-    public void Value_Is_Null(StringComparison? comparisonType, string actualMessage, bool expectedIsMatch)
+    public void Value_Is_Null(StringComparison? comparisonType, string? actualMessage, bool expectedIsMatch)
         => When(Data.Null, comparisonType, actualMessage, expectedIsMatch);
 
     [Theory]
@@ -205,7 +205,7 @@ public sealed class MessageEqualsTests : ExpectationTestBase
     [InlineData(StringComparison.OrdinalIgnoreCase, Data.Apple_OrangePear, false)]
     [InlineData(StringComparison.OrdinalIgnoreCase, Data.AppleOrangePear_, false)]
     [InlineData(StringComparison.OrdinalIgnoreCase, Data.Apple_apple_Apple, false)]
-    public void Value_Is_WhiteSpace(StringComparison? comparisonType, string actualMessage, bool expectedIsMatch)
+    public void Value_Is_WhiteSpace(StringComparison? comparisonType, string? actualMessage, bool expectedIsMatch)
         => When(Data.Whitespace, comparisonType, actualMessage, expectedIsMatch);
 
     private void Expect<TException>(string? value, StringComparison? comparisonType, string expectedMessage)
@@ -218,7 +218,7 @@ public sealed class MessageEqualsTests : ExpectationTestBase
         Assert.Equal(expectedMessage, exception.Message);
     }
 
-    private void When(string value, StringComparison? comparisonType, string actualMessage, bool expectedIsMatch)
+    private void When(string value, StringComparison? comparisonType, string? actualMessage, bool expectedIsMatch)
     {
         // arrange
         var messageEquals = comparisonType.HasValue ? new MessageEquals(value, comparisonType.Value) : new MessageEquals(value);
