@@ -1,5 +1,4 @@
 ﻿using Expectable.Expectations;
-using Xunit.Abstractions;
 
 namespace Expectable.Tests.ReadmeExamples;
 

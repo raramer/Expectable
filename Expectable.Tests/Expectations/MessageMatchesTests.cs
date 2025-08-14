@@ -96,7 +96,7 @@ public sealed class MessageMatchesTests : ExpectationTestBase
     [InlineData(RegexOptions.IgnoreCase, Data.Apple_OrangePear, true)]
     [InlineData(RegexOptions.IgnoreCase, Data.AppleOrangePear_, true)]
     [InlineData(RegexOptions.IgnoreCase, Data.Apple_apple_Apple, true)]
-    public void Value_Is_Apple(RegexOptions? options, string actualMessage, bool expectedIsMatch)
+    public void Value_Is_Apple(RegexOptions? options, string? actualMessage, bool expectedIsMatch)
         => When(Data.Apple, options, actualMessage, expectedIsMatch);
 
     [Fact]
@@ -147,7 +147,7 @@ public sealed class MessageMatchesTests : ExpectationTestBase
     [InlineData(RegexOptions.IgnoreCase, Data.Apple_OrangePear, true)]
     [InlineData(RegexOptions.IgnoreCase, Data.AppleOrangePear_, true)]
     [InlineData(RegexOptions.IgnoreCase, Data.Apple_apple_Apple, true)]
-    public void Value_Is_WhiteSpace(RegexOptions? options, string actualMessage, bool expectedIsMatch)
+    public void Value_Is_WhiteSpace(RegexOptions? options, string? actualMessage, bool expectedIsMatch)
         => When(Data.Whitespace, options, actualMessage, expectedIsMatch);
 
     private void Expect<TException>(string? pattern, RegexOptions? options, string expectedMessage)
@@ -160,7 +160,7 @@ public sealed class MessageMatchesTests : ExpectationTestBase
         Assert.Equal(expectedMessage, exception.Message);
     }
 
-    private void When(string pattern, RegexOptions? options, string actualMessage, bool expectedIsMatch)
+    private void When(string pattern, RegexOptions? options, string? actualMessage, bool expectedIsMatch)
     {
         // arrange
         var messageMatches = options.HasValue ? new MessageMatches(pattern, options.Value) : new MessageMatches(pattern);
